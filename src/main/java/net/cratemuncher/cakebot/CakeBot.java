@@ -42,7 +42,7 @@ public class CakeBot extends ListenerAdapter {
                 .setName("CakeBot9001")
                 .setAutoNickChange(true)
                 .setServerHostname("irc.freenode.net")
-                .addAutoJoinChannel("#cakebot-test")
+                .addAutoJoinChannel("#bitvid")
                 .addListener(new CakeBot())
                 .setAutoNickChange(true)
                 .setAutoReconnect(true)
