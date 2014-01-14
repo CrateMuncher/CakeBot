@@ -12,6 +12,7 @@ import java.util.List;
 public class CakeBot extends ListenerAdapter {
 
     public static List<CBCommand> commands;
+    public static List<CBFeature> features;
 
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
@@ -23,7 +24,6 @@ public class CakeBot extends ListenerAdapter {
                     args.add(fullargs[i]);
                 }
                 cmd.handle(event, args);
-                return;
             }
         }
     }
@@ -44,6 +44,9 @@ public class CakeBot extends ListenerAdapter {
                 .setAutoNickChange(true)
                 .setAutoReconnect(true)
                 .buildConfiguration();
+        for (ListenerAdapter listener : features) {
+            conf.getListenerManager().addListener(listener);
+        }
 
         try {
             PircBotX bot = new PircBotX(conf);
@@ -56,6 +59,16 @@ public class CakeBot extends ListenerAdapter {
     public static void registerCommand(Class<? extends CBCommand> clazz) {
         try {
             commands.add(clazz.newInstance());
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void registerFeature(Class<? extends CBFeature> clazz) {
+        try {
+            features.add(clazz.newInstance());
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
