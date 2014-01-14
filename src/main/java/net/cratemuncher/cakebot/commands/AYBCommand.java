@@ -3,7 +3,6 @@ package net.cratemuncher.cakebot.commands;
 import net.cratemuncher.cakebot.CBCommand;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
-import java.util.Date;
 import java.util.List;
 
 public class AYBCommand extends CBCommand {
