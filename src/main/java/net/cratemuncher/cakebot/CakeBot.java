@@ -30,6 +30,8 @@ public class CakeBot extends ListenerAdapter {
 
     public static void main(String[] args) throws Exception {
         commands = new ArrayList<CBCommand>();
+        features = new ArrayList<CBFeature>();
+
         registerCommand(TimeCommand.class);
         registerCommand(HelpCommand.class);
         registerCommand(AYBCommand.class);
