@@ -37,6 +37,7 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(AYBCommand.class);
         registerCommand(BitcoinWalletCommand.class);
         registerCommand(StatusCommand.class);
+        DodoCommands.registerCommands();
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
