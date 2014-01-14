@@ -6,9 +6,9 @@ import java.util.List;
 
 public abstract class CBCommand {
     
-    private String cmd;
-    private String desc;
-    private String regex;
+    private final String cmd;
+    private final String desc;
+    private final String regex;
     
     public CBCommand(String cmd, String desc) {
         this.cmd = cmd;
