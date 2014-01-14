@@ -20,7 +20,7 @@ public class CakeBot extends ListenerAdapter {
             if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) { // Basically, run this block if the message either matches the command OR the regex
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
-                for (int i=1; i<fullargs.length; i++) {
+                for (int i = 1; i<fullargs.length; i++) {
                     args.add(fullargs[i]);
                 }
                 cmd.handle(event, args);
@@ -41,7 +41,7 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(AYBCommand.class);
         registerCommand(BitcoinWalletCommand.class);
         registerCommand(StatusCommand.class);
-        DodoCommands.registerCommands();
+        registerCommand(CalculateCommand.class);
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
