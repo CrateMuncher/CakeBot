@@ -1,8 +1,10 @@
 package net.cratemuncher.cakebot;
 
 import net.cratemuncher.cakebot.commands.AYBCommand;
+import net.cratemuncher.cakebot.commands.BitcoinWalletCommand;
 import net.cratemuncher.cakebot.commands.HelpCommand;
 import net.cratemuncher.cakebot.commands.TimeCommand;
+
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -10,7 +12,6 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.cratemuncher.cakebot.commands.BitcoinWalletCommand;
 
 public class CakeBot extends ListenerAdapter {
 
