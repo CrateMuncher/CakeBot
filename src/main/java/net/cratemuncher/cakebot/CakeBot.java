@@ -10,6 +10,7 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.cratemuncher.cakebot.commands.BitcoinWalletCommand;
 
 public class CakeBot extends ListenerAdapter {
 
@@ -28,6 +29,17 @@ public class CakeBot extends ListenerAdapter {
                 return;
             }
         }
+        for (CBCommand command : commands) {
+            if (command.hasRegex() && event.getMessage().matches(command.getRegex())) {
+                String[] args = event.getMessage().split(" ");
+                List<String> argsList = new ArrayList<String>();
+                for (int i = 1; i < args.length; i++) {
+                    argsList.add(args[i]);
+                }
+                command.handle(event, argsList);
+                return;
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -35,6 +47,7 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(TimeCommand.class);
         registerCommand(HelpCommand.class);
         registerCommand(AYBCommand.class);
+        registerCommand(BitcoinWalletCommand.class);
 
         Configuration conf = new Configuration.Builder()
                 .setName("CakeBot9001")
