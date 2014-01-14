@@ -7,7 +7,8 @@ import java.util.List;
 
 public class AYBCommand extends CBCommand {
     public AYBCommand() {
-        super("ayb", "ALL YOUR BASE");
+        setCmd("ayb");
+        setDesc("ALL YOUR BASE");
     }
 
     @Override

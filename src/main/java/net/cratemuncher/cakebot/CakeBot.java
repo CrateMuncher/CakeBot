@@ -19,24 +19,13 @@ public class CakeBot extends ListenerAdapter {
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
         for (CBCommand cmd : commands) {
-            if (event.getMessage().matches("^!" + cmd.getCmd() + ".*$")) {
+            if ((event.getMessage().matches("^!" + cmd.getCmd() + ".*$")) || (cmd.hasRegex() && event.getMessage().matches("^" + cmd.getRegex() + "$"))) { // Basically, run this block if the message either matches the command OR the regex
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
                 for (int i=1; i<fullargs.length; i++) {
                     args.add(fullargs[i]);
                 }
                 cmd.handle(event, args);
-                return;
-            }
-        }
-        for (CBCommand command : commands) {
-            if (command.hasRegex() && event.getMessage().matches(command.getRegex())) {
-                String[] args = event.getMessage().split(" ");
-                List<String> argsList = new ArrayList<String>();
-                for (int i = 1; i < args.length; i++) {
-                    argsList.add(args[i]);
-                }
-                command.handle(event, argsList);
                 return;
             }
         }
@@ -55,6 +44,8 @@ public class CakeBot extends ListenerAdapter {
                 .setServerHostname("irc.freenode.net")
                 .addAutoJoinChannel("#cakebot-test")
                 .addListener(new CakeBot())
+                .setAutoNickChange(true)
+                .setAutoReconnect(true)
                 .buildConfiguration();
 
         try {

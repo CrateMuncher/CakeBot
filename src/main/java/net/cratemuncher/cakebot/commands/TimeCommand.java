@@ -8,7 +8,8 @@ import java.util.List;
 
 public class TimeCommand extends CBCommand {
     public TimeCommand() {
-        super("time", "Shows the current time.");
+        setCmd("time");
+        setDesc("Shows the current time.");
     }
 
     @Override

@@ -8,7 +8,8 @@ import java.util.List;
 
 public class HelpCommand extends CBCommand {
     public HelpCommand() {
-        super("help", "Shows this screen.");
+        setCmd("help");
+        setDesc("Shows this screen.");
     }
 
     @Override
