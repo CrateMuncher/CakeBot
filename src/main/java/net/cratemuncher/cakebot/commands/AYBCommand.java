@@ -12,6 +12,6 @@ public class AYBCommand extends CBCommand {
 
     @Override
     public void handle(GenericMessageEvent evt, List<String> args) {
-        evt.respond("ALL YOUR " + (args.size() > 0 ? args.get(0) : "BASE") + " ARE BELONG TO US");
+        evt.respond("ALL YOUR " + (args.size() > 0 ? args.get(0).toUpperCase() : "BASE") + " ARE BELONG TO US");
     }
 }
