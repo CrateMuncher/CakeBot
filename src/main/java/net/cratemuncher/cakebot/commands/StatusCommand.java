@@ -28,4 +28,9 @@ public class StatusCommand extends CBCommand {
         }
         evt.respond("Status: " + status);
     }
+
+    @Override
+    public void handle(GenericMessageEvent evt, String arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

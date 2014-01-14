@@ -17,13 +17,17 @@ public class CakeBot extends ListenerAdapter {
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
         for (CBCommand cmd : commands) {
-            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$")) || (cmd.hasRegex() && event.getMessage().matches("^" + cmd.getRegex() + "$"))) { // Basically, run this block if the message either matches the command OR the regex
+            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) { // Basically, run this block if the message either matches the command OR the regex
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
                 for (int i=1; i<fullargs.length; i++) {
                     args.add(fullargs[i]);
                 }
                 cmd.handle(event, args);
+            }
+            // Usually when a regex is matched, the handler wants the entire message
+            else if (cmd.hasRegex() && event.getMessage().matches("^" + cmd.getRegex() + "$")) {
+                cmd.handle(event, event.getMessage());
             }
         }
     }

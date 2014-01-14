@@ -15,5 +15,10 @@ public class BitcoinWalletCommand extends CBCommand {
     public void handle(GenericMessageEvent evt, List<String> args) {
         evt.respond("This is a Bitcoin wallet address.");
     }
+
+    @Override
+    public void handle(GenericMessageEvent evt, String arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
