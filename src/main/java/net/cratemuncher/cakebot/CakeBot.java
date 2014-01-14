@@ -19,7 +19,7 @@ public class CakeBot extends ListenerAdapter {
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
         for (CBCommand cmd : commands) {
-            if ((event.getMessage().matches("^!" + cmd.getCmd() + ".*$")) || (cmd.hasRegex() && event.getMessage().matches("^" + cmd.getRegex() + "$"))) { // Basically, run this block if the message either matches the command OR the regex
+            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$")) || (cmd.hasRegex() && event.getMessage().matches("^" + cmd.getRegex() + "$"))) { // Basically, run this block if the message either matches the command OR the regex
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
                 for (int i=1; i<fullargs.length; i++) {
@@ -39,10 +39,9 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(BitcoinWalletCommand.class);
 
         Configuration conf = new Configuration.Builder()
-                .setName("CakeBot9001")
-                .setAutoNickChange(true)
-                .setServerHostname("irc.freenode.net")
-                .addAutoJoinChannel("#bitvid")
+                .setName(Config.name)
+                .setServerHostname(Config.hostname)
+                .addAutoJoinChannel(Config.channel)
                 .addListener(new CakeBot())
                 .setAutoNickChange(true)
                 .setAutoReconnect(true)
