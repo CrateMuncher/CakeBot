@@ -31,7 +31,7 @@ public class CakeBot extends ListenerAdapter {
             }
         }
         for (CBCommand command : commands) {
-            if (command.hasRegex() && event.getMessage().matches(command.getRegex())) {
+            if (event.getMessage().matches(command.getRegex())) {
                 String[] args = event.getMessage().split(" ");
                 List<String> argsList = new ArrayList<String>();
                 for (int i = 1; i < args.length; i++) {
