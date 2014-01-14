@@ -15,23 +15,24 @@ public class CalculateCommand extends CBCommand {
     public CalculateCommand() {
         setCmd("calculate");
         setDesc("Can evaluate a mathematical problem.");
-        setRegex("[0-9\\+\\-\\*]{3,}");
+        setRegex("[0-9\\+\\-\\*\\s]{3,}");
     }
 
     @Override
     public void handle(GenericMessageEvent evt, List<String> args) {
-        // Do nothing
-    }
-
-    @Override
-    public void handle(GenericMessageEvent evt, String arg) {
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("js");
-        try {
-            Object result = engine.eval(arg);
-            evt.respond(arg + " = " + result);
-        } catch (ScriptException ex) {
-            Logger.getLogger(CalculateCommand.class.getName()).log(Level.SEVERE, null, ex);
+        String problem = "";
+        for (String arg : args) {
+            problem += arg;
+        }
+        if (problem.matches(getRegex())) {
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine engine = manager.getEngineByName("js");
+            try {
+                Object result = engine.eval(problem);
+                evt.respond(problem + " = " + result);
+            } catch (ScriptException ex) {
+                Logger.getLogger(CalculateCommand.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

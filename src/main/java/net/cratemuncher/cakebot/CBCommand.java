@@ -12,7 +12,6 @@ public abstract class CBCommand {
     private boolean hide = false;
 
     public abstract void handle(GenericMessageEvent evt, List<String> args);
-    public abstract void handle(GenericMessageEvent evt, String arg);
 
     public String getCmd() {
         return cmd;
