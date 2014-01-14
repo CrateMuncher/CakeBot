@@ -18,7 +18,7 @@ public class CakeBot extends ListenerAdapter {
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
         for (CBCommand cmd : commands) {
-            if (event.getMessage().matches("^!" + cmd.getCmd())) {
+            if (event.getMessage().matches("^!" + cmd.getCmd() + ".*$")) {
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
                 for (int i=1; i<fullargs.length; i++) {
