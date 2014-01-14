@@ -1,1 +1,1 @@
-worker:  java -cp target/classes:target/dependency/* CakeBot
+worker:  java -cp target/classes:target/dependency/* net.cratemuncher.cakebot.CakeBot
