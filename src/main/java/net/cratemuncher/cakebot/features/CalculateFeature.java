@@ -17,7 +17,7 @@ public class CalculateFeature extends CBFeature {
 
     @Override
     public void onGenericMessage(GenericMessageEvent evt) throws Exception {
-        String problem = evt.getMessage();
+        String problem = evt.getMessage().replaceAll(" ", "");
         if (problem.matches("^([-+/*]*\\d+(\\.\\d+)?)*$")) {
             ScriptEngineManager manager = new ScriptEngineManager();
             ScriptEngine engine = manager.getEngineByName("js");
