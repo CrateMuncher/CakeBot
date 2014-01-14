@@ -1,8 +1,6 @@
 package net.cratemuncher.cakebot;
 
-import net.cratemuncher.cakebot.commands.AYBCommand;
-import net.cratemuncher.cakebot.commands.HelpCommand;
-import net.cratemuncher.cakebot.commands.TimeCommand;
+import net.cratemuncher.cakebot.commands.*;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -10,7 +8,6 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.cratemuncher.cakebot.commands.BitcoinWalletCommand;
 
 public class CakeBot extends ListenerAdapter {
 
@@ -37,6 +34,7 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(HelpCommand.class);
         registerCommand(AYBCommand.class);
         registerCommand(BitcoinWalletCommand.class);
+        registerCommand(StatusCommand.class);
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
