@@ -1,3 +1,5 @@
+package net.cratemuncher.cakebot;
+
 import net.cratemuncher.cakebot.CakeBot;
 import net.cratemuncher.cakebot.commands.CalculateCommand;
 
