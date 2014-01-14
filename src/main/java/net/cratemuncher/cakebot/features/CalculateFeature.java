@@ -25,7 +25,7 @@ public class CalculateFeature extends CBFeature {
                 Object result = engine.eval(problem);
                 evt.respond(problem + " = " + result);
             } catch (ScriptException ex) {
-                Logger.getLogger(CalculateFeature.class.getName()).log(Level.SEVERE, null, ex);
+                evt.respond("Syntax error");
             }
         }
     }
