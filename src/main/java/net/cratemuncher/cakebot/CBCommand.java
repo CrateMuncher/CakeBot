@@ -8,7 +8,6 @@ public abstract class CBCommand {
     
     private String cmd = "";
     private String desc = "Someone forgot to set a description. It was probably dodo.";
-    private String regex = "";
     private boolean hide = false;
 
     public abstract void handle(GenericMessageEvent evt, List<String> args);
@@ -19,14 +18,6 @@ public abstract class CBCommand {
 
     public String getDesc() {
         return desc;
-    }
-    
-    public boolean hasRegex() {
-        return !regex.isEmpty();
-    }
-    
-    public String getRegex() {
-        return regex;
     }
 
     public boolean getHide() {
@@ -40,10 +31,6 @@ public abstract class CBCommand {
 
     protected void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    protected void setRegex(String regex) {
-        this.regex = regex;
     }
 
     protected void setHide(boolean hide) {

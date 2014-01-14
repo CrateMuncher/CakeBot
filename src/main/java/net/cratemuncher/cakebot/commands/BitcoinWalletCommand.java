@@ -8,7 +8,6 @@ public class BitcoinWalletCommand extends CBCommand {
     public BitcoinWalletCommand() {
         setCmd("bitcoin-balance");
         setDesc("Shows the balance of a particular Bitcoin wallet.");
-        setRegex("[A-Za-z0-9]{34}");
     }
 
     @Override

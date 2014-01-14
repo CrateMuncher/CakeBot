@@ -1,12 +1,14 @@
 package net.cratemuncher.cakebot;
 
 import net.cratemuncher.cakebot.commands.*;
+import net.cratemuncher.cakebot.features.CalculateFeature;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CakeBot extends ListenerAdapter {
@@ -17,16 +19,10 @@ public class CakeBot extends ListenerAdapter {
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
         for (CBCommand cmd : commands) {
-            boolean regex = false;
-            if ((cmd.hasRegex() && event.getMessage().matches("^" + cmd.getRegex() + "$"))) {
-                regex = true;
-            }
-            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$")) || regex) { // Basically, run this block if the message either matches the command OR the regex
+            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) { // Basically, run this block if the message either matches the command OR the regex
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
-                for (int i = regex ? 0 : 1; i<fullargs.length; i++) {
-                    args.add(fullargs[i]);
-                }
+                args.addAll(Arrays.asList(fullargs).subList(1, fullargs.length));
                 cmd.handle(event, args);
             }
         }
@@ -41,7 +37,8 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(AYBCommand.class);
         registerCommand(BitcoinWalletCommand.class);
         registerCommand(StatusCommand.class);
-        registerCommand(CalculateCommand.class);
+
+        registerFeature(CalculateFeature.class);
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
