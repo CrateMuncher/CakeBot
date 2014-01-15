@@ -2,6 +2,7 @@ package net.cratemuncher.cakebot;
 
 import net.cratemuncher.cakebot.commands.*;
 import net.cratemuncher.cakebot.features.CalculateFeature;
+import net.cratemuncher.cakebot.features.SubredditFeature;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -39,6 +40,7 @@ public class CakeBot extends ListenerAdapter {
         registerCommand(StatusCommand.class);
 
         registerFeature(CalculateFeature.class);
+        registerFeature(SubredditFeature.class);
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
