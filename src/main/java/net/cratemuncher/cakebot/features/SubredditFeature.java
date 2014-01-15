@@ -4,13 +4,13 @@ import net.cratemuncher.cakebot.CBFeature;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SubredditFeature extends CBFeature {
-    private Pattern subredditPattern = Pattern.compile("/r/(\\w+)+");
+    private Pattern subredditPattern = Pattern.compile("/r/([A-Za-z0-9_.-]+)+");
 
     public SubredditFeature() {
         setDesc("Expands /r/subreddits into full links");
@@ -22,7 +22,7 @@ public class SubredditFeature extends CBFeature {
 
         Matcher m = subredditPattern.matcher(text);
 
-        Set<String> links = new HashSet<String>(); //java.util.Set, just to prevent duplicates
+        Set<String> links = new LinkedHashSet<String>(); //java.util.Set, just to prevent duplicates
         while (m.find()) {
             links.add("http://reddit.com/r/" + m.group(1));
         }
