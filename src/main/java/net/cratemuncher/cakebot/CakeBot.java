@@ -11,6 +11,7 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import net.cratemuncher.cakebot.features.VerifyFeature;
 
 public class CakeBot extends ListenerAdapter {
 
@@ -41,6 +42,7 @@ public class CakeBot extends ListenerAdapter {
 
         registerFeature(CalculateFeature.class);
         registerFeature(SubredditFeature.class);
+        registerFeature(VerifyFeature.class);
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
