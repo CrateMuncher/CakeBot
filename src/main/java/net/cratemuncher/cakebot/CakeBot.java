@@ -1,8 +1,5 @@
 package net.cratemuncher.cakebot;
 
-import net.cratemuncher.cakebot.commands.*;
-import net.cratemuncher.cakebot.features.CalculateFeature;
-import net.cratemuncher.cakebot.features.SubredditFeature;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;

@@ -17,8 +17,8 @@ public class VerifyFeature extends CBFeature {
 
     @Override
     public void onGenericMessage(GenericMessageEvent evt) throws Exception {
-        String regex = "^(([-+/*]*\\d+(\\.\\d+)?)*)\\s*=\\s*(([-+/*]*\\d+(\\.\\d+)?)*)$";
-        String problem = evt.getMessage();
+        String regex = "^.*?(([-+/*^]*\\d+(\\.\\d+)?)*)\\s*={1,2}\\s*(([-+/*^]*\\d+(\\.\\d+)?)*).*?$";
+        String problem = evt.getMessage().replaceAll(" ", "");
         if (problem.matches(regex)) {
             String leftProblem = problem.replaceAll(regex, "$1");
             String rightProblem = problem.replaceAll(regex, "$4");
@@ -27,13 +27,9 @@ public class VerifyFeature extends CBFeature {
             try {
                 Object resultLeft = engine.eval(leftProblem);
                 Object resultRight = engine.eval(rightProblem);
-                if (resultLeft.equals(resultRight)) {
-                    evt.respond(resultLeft + " = " + resultRight);
+                if ( ! resultLeft.equals(resultRight)) {
+                    evt.respond("Rubbish! " + leftProblem + " != " + rightProblem);
                 }
-                else {
-                    evt.respond(resultLeft + " != " + resultRight);
-                }
-
             } catch (ScriptException ex) {
                 Logger.getLogger(CalculateFeature.class.getName()).log(Level.SEVERE, null, ex);
             }
