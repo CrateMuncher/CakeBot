@@ -20,7 +20,7 @@ public class CakeBot extends ListenerAdapter {
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
         for (CBCommand cmd : commands) {
-            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) { // Basically, run this block if the message either matches the command OR the regex
+            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) {
                 String[] fullargs = event.getMessage().split(" ");
                 List<String> args = new ArrayList<String>();
                 args.addAll(Arrays.asList(fullargs).subList(1, fullargs.length));
@@ -33,14 +33,7 @@ public class CakeBot extends ListenerAdapter {
         commands = new ArrayList<CBCommand>();
         features = new ArrayList<CBFeature>();
 
-        registerCommand(TimeCommand.class);
-        registerCommand(HelpCommand.class);
-        registerCommand(AYBCommand.class);
-        registerCommand(BitcoinWalletCommand.class);
-        registerCommand(StatusCommand.class);
-
-        registerFeature(CalculateFeature.class);
-        registerFeature(SubredditFeature.class);
+        CakeBotRegisters.register();
 
         Configuration conf = new Configuration.Builder()
                 .setName(Config.name)
