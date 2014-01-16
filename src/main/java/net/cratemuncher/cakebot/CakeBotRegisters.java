@@ -3,6 +3,7 @@ package net.cratemuncher.cakebot;
 import net.cratemuncher.cakebot.commands.*;
 import net.cratemuncher.cakebot.features.CalculateFeature;
 import net.cratemuncher.cakebot.features.SubredditFeature;
+import net.cratemuncher.cakebot.features.VerifyFeature;
 
 public class CakeBotRegisters {
     public static void register() {
@@ -14,5 +15,6 @@ public class CakeBotRegisters {
 
         CakeBot.registerFeature(CalculateFeature.class);
         CakeBot.registerFeature(SubredditFeature.class);
+        CakeBot.registerFeature(VerifyFeature.class);
     }
 }

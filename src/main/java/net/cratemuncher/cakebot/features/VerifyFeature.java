@@ -13,7 +13,7 @@ public class VerifyFeature extends CBFeature {
 
     @Override
     public void onGenericMessage(GenericMessageEvent evt) throws Exception {
-        String problem = evt.getMessage();
+        String problem = evt.getMessage().replaceAll(" ", "");
         try {
             String[] sides = problem.split("=");
             double[] results = new double[sides.length];
@@ -24,7 +24,6 @@ public class VerifyFeature extends CBFeature {
                 Calculable calc = new ExpressionBuilder(sides[i]).build();
                 double result = calc.calculate();
                 results[i] = result;
-                sides[i] = calc.getExpression();
             }
 
             boolean equal = true;
@@ -38,7 +37,7 @@ public class VerifyFeature extends CBFeature {
 
             String text = "";
             for (int i = 0; i < results.length; i++) {
-                text = text + sides[i] + " (" + results[0] + ")";
+                text = text + sides[i] + " [" + results[i] + "]";
                 if (i < results.length-1) {
                     text = text + (equal ? " == " : " != ");
                 }

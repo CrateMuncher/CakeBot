@@ -17,11 +17,11 @@ public class CalculateFeature extends CBFeature {
 
     @Override
     public void onGenericMessage(GenericMessageEvent evt) throws Exception {
-        String problem = evt.getMessage();
+        String problem = evt.getMessage().replaceAll(" ", "");
         try {
             Calculable calc = new ExpressionBuilder(problem).build();
             double result=calc.calculate();
-            evt.respond(calc.getExpression() + " = " + result);
+            evt.respond(problem + " = " + result);
         } catch (Exception ignored) {
         }
     }
