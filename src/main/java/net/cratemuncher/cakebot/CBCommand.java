@@ -10,7 +10,7 @@ public abstract class CBCommand {
     private String desc = "Someone forgot to set a description. It was probably dodo.";
     private boolean hide = false;
 
-    public abstract void handle(GenericMessageEvent evt, List<String> args);
+    public abstract void handle(GenericMessageEvent evt, List<String> args) throws Exception;
 
     public String getCmd() {
         return cmd;

@@ -1,5 +1,6 @@
 package net.cratemuncher.cakebot;
 
+import org.pircbotx.Channel;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -16,13 +17,17 @@ public class CakeBot extends ListenerAdapter {
 
     @Override
     public void onGenericMessage(GenericMessageEvent event) throws Exception {
-        for (CBCommand cmd : commands) {
-            if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) {
-                String[] fullargs = event.getMessage().split(" ");
-                List<String> args = new ArrayList<String>();
-                args.addAll(Arrays.asList(fullargs).subList(1, fullargs.length));
-                cmd.handle(event, args);
+        try {
+            for (CBCommand cmd : commands) {
+                if ((event.getMessage().matches("^" + Config.prefix + cmd.getCmd() + ".*$"))) {
+                    String[] fullargs = event.getMessage().split(" ");
+                    List<String> args = new ArrayList<String>();
+                    args.addAll(Arrays.asList(fullargs).subList(1, fullargs.length));
+                    cmd.handle(event, args);
+                }
             }
+        } catch (Exception e) {
+            event.respond("I oopsed :( [" + e.getCause().getClass().getName() + ": " + e.getMessage() + "]");
         }
     }
 
@@ -44,8 +49,9 @@ public class CakeBot extends ListenerAdapter {
             conf.getListenerManager().addListener(listener);
         }
 
+        PircBotX bot;
         try {
-            PircBotX bot = new PircBotX(conf);
+            bot = new PircBotX(conf);
             bot.startBot();
         } catch (Exception ex) {
             ex.printStackTrace();
