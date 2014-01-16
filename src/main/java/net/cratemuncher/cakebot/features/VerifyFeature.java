@@ -28,7 +28,7 @@ public class VerifyFeature extends CBFeature {
                 Object resultLeft = engine.eval(leftProblem);
                 Object resultRight = engine.eval(rightProblem);
                 if ( ! resultLeft.equals(resultRight)) {
-                    evt.respond("Rubbish! " + leftProblem + " != " + rightProblem);
+                    evt.respond("Rubbish! " + leftProblem + " (" + resultLeft + ") != " + rightProblem + " (" + resultRight + ")");
                 }
             } catch (ScriptException ex) {
                 Logger.getLogger(CalculateFeature.class.getName()).log(Level.SEVERE, null, ex);
