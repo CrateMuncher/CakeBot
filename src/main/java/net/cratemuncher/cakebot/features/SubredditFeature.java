@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SubredditFeature extends CBFeature {
-    private Pattern subredditPattern = Pattern.compile("/r/([A-Za-z0-9_.-]+)+");
+    private Pattern subredditPattern = Pattern.compile("^(?!.*?reddit\\.com)\\/?r\\/(.+)$");
 
     public SubredditFeature() {
         setDesc("Expands /r/subreddits into full links");
