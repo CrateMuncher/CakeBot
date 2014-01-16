@@ -1,38 +1,55 @@
 package net.cratemuncher.cakebot.features;
 
+import de.congrace.exp4j.Calculable;
+import de.congrace.exp4j.ExpressionBuilder;
 import net.cratemuncher.cakebot.CBFeature;
 import org.pircbotx.hooks.types.GenericMessageEvent;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 public class VerifyFeature extends CBFeature {
 
     public VerifyFeature() {
-        setDesc("Verifies math");
+        setDesc("Verifies mathemathical expressions");
     }
 
     @Override
     public void onGenericMessage(GenericMessageEvent evt) throws Exception {
-        String regex = "^.*?(([-+/*^]*\\d+(\\.\\d+)?)*)\\s*={1,2}\\s*(([-+/*^]*\\d+(\\.\\d+)?)*).*?$";
-        String problem = evt.getMessage().replaceAll(" ", "");
-        if (problem.matches(regex)) {
-            String leftProblem = problem.replaceAll(regex, "$1");
-            String rightProblem = problem.replaceAll(regex, "$4");
-            ScriptEngineManager manager = new ScriptEngineManager();
-            ScriptEngine engine = manager.getEngineByName("js");
-            try {
-                Object resultLeft = engine.eval(leftProblem);
-                Object resultRight = engine.eval(rightProblem);
-                if ( ! resultLeft.equals(resultRight)) {
-                    evt.respond("Rubbish! " + leftProblem + " != " + rightProblem);
-                }
-            } catch (ScriptException ex) {
-                Logger.getLogger(CalculateFeature.class.getName()).log(Level.SEVERE, null, ex);
+        String problem = evt.getMessage();
+        try {
+            String[] sides = problem.split("=");
+            double[] results = new double[sides.length];
+            if (sides.length < 2) {
+                return;
             }
+            for (int i = 0; i < sides.length; i++) {
+                Calculable calc = new ExpressionBuilder(sides[i]).build();
+                double result = calc.calculate();
+                results[i] = result;
+                sides[i] = calc.getExpression();
+            }
+
+            boolean equal = true;
+            double prev = results[0];
+            for (double num : results) {
+                if (!equal) {
+                    break;
+                }
+                equal = Math.abs(prev - num) < 0.0001; // "equal" remains true if the difference between the numbers is less than 0.0001 (to account for floating point errors)
+            }
+
+            String text = "";
+            for (int i = 0; i < results.length; i++) {
+                text = text + sides[i] + " (" + results[0] + ")";
+                if (i < results.length-1) {
+                    text = text + (equal ? " == " : " != ");
+                }
+            }
+
+            if (equal) {
+                evt.respond("Yes, " + text);
+            } else {
+                evt.respond("Dang, " + text);
+            }
+        } catch (Exception ignored) {
         }
     }
 }
