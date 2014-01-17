@@ -13,6 +13,7 @@ public class CakeBotRegisters {
         CakeBot.registerCommand(AYBCommand.class);
         CakeBot.registerCommand(BitcoinWalletCommand.class);
         CakeBot.registerCommand(StatusCommand.class);
+        CakeBot.registerCommand(RelevantCommand.class);
 
         CakeBot.registerFeature(CalculateFeature.class);
         CakeBot.registerFeature(SubredditFeature.class);
