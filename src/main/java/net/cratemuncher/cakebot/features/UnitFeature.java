@@ -1,6 +1,7 @@
 package net.cratemuncher.cakebot.features;
 
 import net.cratemuncher.cakebot.CBFeature;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -8,6 +9,7 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,7 +68,7 @@ public class UnitFeature extends CBFeature {
                             newVal = newVal * fromVal;
                             newVal = newVal / toVal;
 
-                            evt.respond(value + " " + from + " is " + newVal + " " + to);
+                            evt.respond(round(value, 5) + " " + from + " is " + round(newVal, 5) + " " + to);
                             return;
                         }
                     }
@@ -74,5 +76,9 @@ public class UnitFeature extends CBFeature {
             } catch (NumberFormatException ignored) {
             }
         }
+    }
+
+    private String round(double input, int places) {
+        return new DecimalFormat("#0." + StringUtils.repeat("#", places)).format(input);
     }
 }
