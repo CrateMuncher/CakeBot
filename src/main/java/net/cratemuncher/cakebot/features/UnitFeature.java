@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UnitFeature extends CBFeature {
-    private Pattern conversionPattern = Pattern.compile("^(?:(\\d+)(?:[ ]?)([A-Za-z'\"]+) in ([A-Za-z'\"]+))$");
+    private Pattern conversionPattern = Pattern.compile("^.*?(?:(\\d+)(?:[ ]?)([A-Za-z'\"]+)\\s+(in|as|to)\\s+([A-Za-z'\"]+)).*?$");
     HashMap<String, HashMap<String, Double>> measurements;
 
     public UnitFeature() {
