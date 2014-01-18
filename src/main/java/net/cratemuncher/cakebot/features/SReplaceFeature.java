@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class SReplaceFeature extends CBFeature {
     HashMap<String, String> lastTexts;
-    Pattern p = Pattern.compile("^(?:(.+): )?s/(.+)/(.+)$");
+    Pattern p = Pattern.compile("^(?:(.+): )?s/(.+)/([^/]+)/?$");
 
     public SReplaceFeature() {
         setDesc("Replaces your typos");
