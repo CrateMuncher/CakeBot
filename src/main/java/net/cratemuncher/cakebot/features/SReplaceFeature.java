@@ -12,10 +12,10 @@ import java.util.regex.Pattern;
 
 public class SReplaceFeature extends CBFeature {
     HashMap<String, String> lastTexts;
-    Pattern p = Pattern.compile("^s/(.+)/(.+)$");
+    Pattern p = Pattern.compile("^(.+: )?s/(.+)/(.+)$");
 
     public SReplaceFeature() {
-        setDesc("Replaces your typoes");
+        setDesc("Replaces your typos");
         lastTexts = new HashMap<String, String>();
     }
 
@@ -27,10 +27,21 @@ public class SReplaceFeature extends CBFeature {
         Matcher m = p.matcher(msg);
 
         if (m.matches()) {
-            String from = m.group(1);
-            String to = m.group(2);
+            String from = m.group(2);
+            String to = m.group(3);
 
-            String fixedText = lastTexts.get(evt.getUser().getNick());
+            String user = m.group(1);
+
+            String fixedText;
+            if (user != null) {
+                if (!lastTexts.containsKey(user)) {
+                    return;
+                }
+                fixedText = lastTexts.get(user);
+            } else {
+                fixedText = lastTexts.get(evt.getUser().getNick());
+            }
+
             fixedText = fixedText.replaceAll(from, to);
 
             evt.getChannel().send().message("What " + evt.getUser().getNick() + " meant: " + fixedText);
